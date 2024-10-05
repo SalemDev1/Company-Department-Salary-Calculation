@@ -80,8 +80,9 @@ function calculateDepartmentSalary(department) {
     return totalSalary;
 }
 
-// Helper function to calculate salary of an employee and their subordinates recursively
+//function to calculate salary of an employee and their subordinates recursively
 function calculateEmployeeSalary(employee) {
+    
     let employeeTotal = employee.salary;
     employee.subordinates.forEach(function(subordinate) {
         employeeTotal += calculateEmployeeSalary(subordinate);
@@ -92,3 +93,20 @@ function calculateEmployeeSalary(employee) {
 // Testing the function for one department
 const totalCybersecuritySalary = calculateDepartmentSalary(company.departments[0]);
 console.log(`Total salary for the Cybersecurity department: $${totalCybersecuritySalary}`);
+
+// Task 3 - Create a Function to Calculate the Total Salary for All Departments
+function calculateCompanySalary(company) {
+    let totalCompanySalary = 0;
+
+    // Loops through each department in the company
+    company.departments.forEach(function(department) {
+        // Calculate salary for each department
+        let departmentSalary = calculateDepartmentSalary(department); 
+       // Add department salary to the company's total
+        totalCompanySalary += departmentSalary;  
+        console.log(`Total salary for the ${department.departmentName} department is $${departmentSalary}.`);
+    });
+    console.log(`Total salary for the entire company is $${totalCompanySalary}.`);
+}
+   // Call calculateCompanySalary to get the total salary for all departments
+calculateCompanySalary(company);
